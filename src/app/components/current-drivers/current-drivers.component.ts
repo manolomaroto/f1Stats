@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { F1StatsService } from '../../services/f1-stats.service';
 
 @Component({
   selector: 'app-current-drivers',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurrentDriversComponent implements OnInit {
 
-  constructor() { }
+  constructor(private f1StatsService: F1StatsService) { }
 
   ngOnInit(): void {
+    this.f1StatsService.getCurrentDrivers().subscribe(e => console.log(e));
   }
 
 }
