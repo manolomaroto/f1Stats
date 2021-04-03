@@ -26,10 +26,14 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('f1Stats');
   });
 
-  it('should render title', () => {
+  it('should render navbar', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('f1Stats app is running!');
+    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+  });
+  it('should have outer outlet', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });
