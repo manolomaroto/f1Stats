@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CurrentDriversComponent } from './components/current-drivers/current-drivers.component';
 import { CurrentConstructorsComponent } from './components/current-constructors/current-constructors.component';
+import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CurrentDriversComponent,
-    CurrentConstructorsComponent
+    CurrentConstructorsComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
