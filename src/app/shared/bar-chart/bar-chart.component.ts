@@ -72,7 +72,10 @@ export class BarChartComponent implements OnInit {
       this.chart
           .append('g')
           .attr('transform', `translate(${this.margin}, ${this.yAxisHeight})`)
-          .call(d3.axisBottom(this.xScale));
+          .call(d3.axisBottom(this.xScale))
+          .selectAll('text')
+            .attr('transform', 'translate(-10, 0)rotate(-45)')
+            .style('text-anchor', 'end')
 
       this.chart
           .append('g')
