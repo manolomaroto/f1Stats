@@ -9,7 +9,7 @@ export class F1StatsService {
 
   constructor(private http: HttpClient) { }
 
-  private URL: string = 'http://ergast.com/api/f1/';
+  private URL: string = 'https://ergast.com/api/f1/';
 
   getCurrentDrivers(): Observable<any> {
     let urlDrivers = this.URL + 'current/driverStandings.json';
