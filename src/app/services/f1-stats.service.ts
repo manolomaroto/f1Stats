@@ -15,4 +15,9 @@ export class F1StatsService {
     let urlDrivers = this.URL + 'current/driverStandings.json';
     return this.http.get(urlDrivers);
   }
+
+  getCurrentConstructors(): Observable<any> {
+    let urlCosntructors = this.URL + 'current/constructorStandings.json';
+    return this.http.get(urlCosntructors);
+  }
 }

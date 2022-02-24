@@ -9,6 +9,7 @@ import { F1StatsService } from '../../services/f1-stats.service';
 })
 
 export class BarChartComponent implements OnInit {
+  @Input() graphToShow = "drivers";
   public data: any;
   private chart: any;
   private svg: any;
@@ -26,18 +27,20 @@ export class BarChartComponent implements OnInit {
   constructor(private f1StatsService: F1StatsService) { }
 
   ngOnInit(): void {
-
-
     this.svg = d3.select("#divChart")
                 .append('svg')
                 .attr('width', '100%')
                 .attr('height', 500)
     this.chart = this.svg.append('g');
 
-    this.displayBarChart();
+    if (this.graphToShow == 'drivers') {
+      this.displayBarChartDrivers();
+    } else {
+      this.displayBarChartConstructors();
+    }
   }
 
-  displayBarChart() {
+  displayBarChartDrivers() {
     this.f1StatsService.getCurrentDrivers().subscribe(res => {
       let pointsMax;
       this.data = res.MRData.StandingsTable.StandingsLists[0].DriverStandings;
@@ -52,10 +55,23 @@ export class BarChartComponent implements OnInit {
       this.createBars();
       this.chart.attr('transform', `translate(0, ${this.margin}) scale(.6)`);
     });
+  }
 
-    
-    
-   
+  displayBarChartConstructors(){
+    this.f1StatsService.getCurrentConstructors().subscribe(res => {
+      let pointsMax;
+      this.data = res.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+      this.chartData = [];
+      this.data.forEach( item => {
+        this.chartData.push([item.Constructor.name, item.points]);
+      });
+      pointsMax = this.chartData[0][1];
+      this.chart.remove();
+      this.chart = this.svg.append('g');
+      this.createAxis(this.chartData.length, pointsMax);
+      this.createBars();
+      this.chart.attr('transform', `translate(0, ${this.margin}) scale(.6)`);
+    });
   }
 
   createAxis(items: number, pointsMax) {
