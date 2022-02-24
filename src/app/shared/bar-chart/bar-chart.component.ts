@@ -118,6 +118,7 @@ export class BarChartComponent implements OnInit {
 
   createBars(item) {
     let origin;
+    item == 'drivers' ? origin = 2 : origin = 0;
     this.chart.selectAll().data(this.chartData)
         .enter()
         .append('rect')
