@@ -26,6 +26,19 @@ export class BarChartComponent implements OnInit {
 
   private colors: Array<string> = ['red', 'green', 'blue', 'yellow']
 
+  private teamColors = [
+    {team: 'Mercedes', color: '#00D2BE'},
+    {team: 'Ferrari', color: '#DC0000'},
+    {team: 'Red Bull', color: '#0600EF'},
+    {team: 'Alpine F1 Team', color: '#0090FF'},
+    {team: 'Hass F1 Team', color: '#FFFFFF'},
+    {team: 'Aston Martin', color: '#006F62'},
+    {team: 'AlphaTauri', color: '#2B4562'},
+    {team: 'McLaren', color: '#FF8700'},
+    {team: 'Williams', color: '#005AFF'},
+    {team: 'Alfa Romeo', color: '#900000'}
+  ]
+
   constructor(private f1StatsService: F1StatsService) { }
 
   ngOnInit(): void {
@@ -47,13 +60,13 @@ export class BarChartComponent implements OnInit {
       this.data = res.MRData.StandingsTable.StandingsLists[0].DriverStandings;
       this.chartData = [];
       this.data.forEach( item => {
-        this.chartData.push([item.Driver.familyName, item.points]);
+        this.chartData.push([item.Driver.familyName, item.points, item.Constructors[0].name]);
       });
       pointsMax = this.chartData[0][1];
       this.chart.remove();
       this.chart = this.svg.append('g');
       this.createAxis(this.chartData.length, pointsMax);
-      this.createBars();
+      this.createBars('drivers');
       this.chart.attr('transform', `translate(0, ${this.margin}) scale(.6)`);
     });
   }
@@ -70,7 +83,7 @@ export class BarChartComponent implements OnInit {
       this.chart.remove();
       this.chart = this.svg.append('g');
       this.createAxis(this.chartData.length, pointsMax);
-      this.createBars();
+      this.createBars('constructors');
       this.chart.attr('transform', `translate(0, ${this.margin}) scale(.6)`);
     });
   }
@@ -92,15 +105,19 @@ export class BarChartComponent implements OnInit {
           .call(d3.axisBottom(this.xScale))
           .selectAll('text')
             .attr('transform', 'translate(-10, 0)rotate(-45)')
+            .style('color','white')
             .style('text-anchor', 'end')
 
       this.chart
           .append('g')
           .attr('transform', `translate(${this.margin}, 0)`)
-          .call(d3.axisLeft(this.yScale));
+          .call(d3.axisLeft(this.yScale))
+          .selectAll('text')
+            .style('color','white');
   }
 
-  createBars() {
+  createBars(item) {
+    let origin;
     this.chart.selectAll().data(this.chartData)
         .enter()
         .append('rect')
@@ -108,7 +125,15 @@ export class BarChartComponent implements OnInit {
         .attr('y', d => this.yAxisHeight - d[1])
         .attr('width', this.barWidth)
         .attr('height', d => d[1])
-        .style('fill', (d,i) => this.colors[i%this.colors.length]);
+        .style('fill', (d,i) => this.getColor(d[origin]));
+  }
+
+  getColor(item): string{
+    for(let i = 0; i < this.teamColors.length; i++) {
+      if(item == this.teamColors[i].team){
+        return this.teamColors[i].color;
+      }
+    }
   }
 
 }
