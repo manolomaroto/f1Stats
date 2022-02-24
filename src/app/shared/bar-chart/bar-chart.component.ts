@@ -15,8 +15,10 @@ export class BarChartComponent implements OnInit {
   private svg: any;
   public chartData: Array<any>= [];
 
-  private barWidth: number = 30;
-  private margin: number = 25;
+  private barWidth: number = 60;
+  private margin: number = 20;
+  private width: number = 1000 - this.margin * 2;
+  private height: number = 600 - this.margin * 2;
   private xAxisWidth: number;
   private yAxisHeight: number;
   private xScale: any;
@@ -29,8 +31,7 @@ export class BarChartComponent implements OnInit {
   ngOnInit(): void {
     this.svg = d3.select("#divChart")
                 .append('svg')
-                .attr('width', '100%')
-                .attr('height', 500)
+                .attr("viewBox", `0,0,${this.width+100}, ${this.height+100}`)
     this.chart = this.svg.append('g');
 
     if (this.graphToShow == 'drivers') {
