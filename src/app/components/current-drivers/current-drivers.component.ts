@@ -12,10 +12,7 @@ export class CurrentDriversComponent implements OnInit {
   constructor(private f1StatsService: F1StatsService) { }
 
   ngOnInit(): void {
-    this.f1StatsService.getCurrentDrivers().subscribe(res => {
-      this.data = res.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-      console.log(this.data)
-    });
+
   }
 
 }
