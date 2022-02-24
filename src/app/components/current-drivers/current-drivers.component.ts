@@ -7,11 +7,12 @@ import { F1StatsService } from '../../services/f1-stats.service';
   styleUrls: ['./current-drivers.component.css']
 })
 export class CurrentDriversComponent implements OnInit {
+  public data: [];
 
   constructor(private f1StatsService: F1StatsService) { }
 
   ngOnInit(): void {
-    this.f1StatsService.getCurrentDrivers().subscribe(e => console.log(e));
+
   }
 
 }

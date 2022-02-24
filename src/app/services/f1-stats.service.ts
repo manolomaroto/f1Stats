@@ -13,7 +13,11 @@ export class F1StatsService {
 
   getCurrentDrivers(): Observable<any> {
     let urlDrivers = this.URL + 'current/driverStandings.json';
-    let observable: Observable<any> = this.http.get(urlDrivers);
-    return observable;
+    return this.http.get(urlDrivers);
+  }
+
+  getCurrentConstructors(): Observable<any> {
+    let urlCosntructors = this.URL + 'current/constructorStandings.json';
+    return this.http.get(urlCosntructors);
   }
 }
