@@ -18,7 +18,7 @@ export class BarChartComponent implements OnInit {
 
   private margin: number = 40;
   private width: number = 1000 - this.margin;
-  private height: number = 600 - this.margin;
+  private height: number = 500 - this.margin;
   private xScale: any = d3.scaleBand().range([0, this.width]).padding(0.4);
   private yScale: any = d3.scaleLinear().range([this.height, 0]);
 
@@ -87,23 +87,26 @@ export class BarChartComponent implements OnInit {
   createAxis(items: number, pointsMax) {
 
       let xDomain = this.chartData.map(d => d[0]);
-      
       let yDomain = [0, +pointsMax];
+      let xAxis = d3.axisBottom(this.xScale);
+      let yAxis = d3.axisLeft(this.yScale);
+
       this.xScale.domain(xDomain);
-      this.yScale.domain(yDomain)
+      this.yScale.domain(yDomain);
+      
       this.chart
           .append('g')
           .attr('transform', `translate(0, ${this.height})`)
-          .call(d3.axisBottom(this.xScale))
+          .call(xAxis)
           .selectAll('text')
             .attr('transform', 'translate(-10, 0)rotate(-75)')
             .style('color','white')
             .style('font-size', '18px')
-            .style('text-anchor', 'end')
+            .style('text-anchor', 'end');
 
       this.chart
           .append('g')
-          .call(d3.axisLeft(this.yScale))
+          .call(yAxis)
           .selectAll('text')
             .style('font-size', '18px')
             .style('color','white');
