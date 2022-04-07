@@ -8,6 +8,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { CurrentDriversComponent } from './components/current-drivers/current-drivers.component';
 import { CurrentConstructorsComponent } from './components/current-constructors/current-constructors.component';
 import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
+import { LineChartComponent } from './shared/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
     NavbarComponent,
     CurrentDriversComponent,
     CurrentConstructorsComponent,
-    BarChartComponent
+    BarChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,

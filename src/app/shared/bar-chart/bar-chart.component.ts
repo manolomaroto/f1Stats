@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as d3 from 'd3'
+import * as d3 from 'd3';
 import { style } from 'd3';
 import { F1StatsService } from '../../services/f1-stats.service';
 
