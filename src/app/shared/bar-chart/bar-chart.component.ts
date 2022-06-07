@@ -80,7 +80,7 @@ export class BarChartComponent implements OnInit {
       this.chart = this.svg.append('g');
       this.createAxis(this.chartData.length, pointsMax) ;
       this.createBars('constructors');
-      this.chart.attr('transform', `translate(0, ${this.margin}) scale(.8)`);
+      this.chart.attr('transform', `translate(0, ${this.margin}) scale(.7)`);
     });
   }
 
